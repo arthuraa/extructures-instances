@@ -3,9 +3,9 @@ name: "coq-extructures-instances"
 opam-version: "2.0"
 version: "dev"
 maintainer: "arthur.aa@gmail.com"
-homepage: "https://github.com/arthuraa/extructures-ord-instances"
-dev-repo: "git+https://github.com/arthuraa/extructures-ord-instances.git"
-bug-reports: "https://github.com/arthuraa/extructures/issues"
+homepage: "https://github.com/arthuraa/extructures-instances"
+dev-repo: "git+https://github.com/arthuraa/extructures-instances.git"
+bug-reports: "https://github.com/arthuraa/extructures-instances/issues"
 authors: ["Arthur Azevedo de Amorim"]
 license: "MIT"
 build: [
