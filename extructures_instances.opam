@@ -1,0 +1,30 @@
+synopsis: "ordType instances for other common MathComp types"
+name: "coq-extructures-instances"
+opam-version: "2.0"
+version: "dev"
+maintainer: "arthur.aa@gmail.com"
+homepage: "https://github.com/arthuraa/extructures-ord-instances"
+dev-repo: "git+https://github.com/arthuraa/extructures-ord-instances.git"
+bug-reports: "https://github.com/arthuraa/extructures/issues"
+authors: ["Arthur Azevedo de Amorim"]
+license: "MIT"
+build: [
+  [make "-j%{jobs}%"]
+]
+install: [
+  [make "install"]
+]
+depends: [
+  "ocaml"
+  "coq" {(>= "8.11" & < "8.16~") | (= "dev")}
+  "coq-mathcomp-ssreflect" {(>= "1.12" & < "1.16~") | (= "dev")}
+  "coq-mathcomp-algebra" {(>= "1.12" & < "1.16~") | (= "dev")}
+  "coq-deriving" {(>= "0.1") | (= "dev")}
+  "coq-extructures" {(>= "0.3") | (= "dev")}
+]
+tags: [
+  "keyword:finite maps"
+  "keyword:extensionality"
+  "category:Computer Science/Data Types and Data Structures"
+  "logpath:extructures.ord_instances"
+]

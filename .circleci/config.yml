@@ -1,0 +1,117 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+# Use a package of configuration called an orb.
+
+defaults: &defaults
+  environment:
+    OPAMJOBS: 2
+    OPAMVERBOSE: 1
+    OPAMYES: true
+    TERM: xterm
+    
+commands:
+  startup:
+    steps:
+    - checkout
+  
+  prepare:
+    parameters:
+      mathcomp-version:
+        type: string
+        default: 1.13.0
+      deriving-version:
+        type: string
+        default: 0.1.0
+      extructures-version:
+        type: string
+        default: 0.3.1
+    steps:
+    - run:
+        name: Install dependencies
+        command: |
+          opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev
+          opam update
+          opam pin add coq-mathcomp-ssreflect \
+            --kind=version << parameters.mathcomp-version >>
+          opam pin add coq-mathcomp-algebra \
+            --kind=version << parameters.mathcomp-version >>
+          opam pin add coq-deriving \
+            --kind=version << parameters.deriving-version >>
+          opam pin add coq-extructures \
+            --kind=version << parameters.extructures-version >>
+          opam install --deps-only .
+
+  build:
+    steps:
+    - run:
+        name: Building extructures
+        command:
+          opam install .
+
+jobs:
+  coq-8-11:
+    <<: *defaults
+    steps:
+    - startup
+    - prepare
+    - build
+    docker:
+    - image: coqorg/coq:8.11
+
+  coq-8-12:
+    <<: *defaults
+    steps:
+    - startup
+    - prepare
+    - build
+    docker:
+    - image: coqorg/coq:8.12
+
+  coq-8-13:
+    <<: *defaults
+    steps:
+    - startup
+    - prepare
+    - build
+    docker:
+    - image: coqorg/coq:8.13
+
+  coq-8-14:
+    <<: *defaults
+    steps:
+    - startup
+    - prepare
+    - build
+    docker:
+    - image: coqorg/coq:8.14
+
+  coq-8-15:
+    <<: *defaults
+    steps:
+    - startup
+    - prepare
+    - build
+    docker:
+    - image: coqorg/coq:8.15
+
+  coq-dev:
+    <<: *defaults
+    steps:
+    - startup
+    - prepare:
+        mathcomp-version: "dev"
+        deriving-version: "dev"
+    - build
+    docker:
+    - image: coqorg/coq:dev
+
+
+workflows:
+  build:
+    jobs:
+    - coq-8-11
+    - coq-8-12
+    - coq-8-13
+    - coq-8-14
+    - coq-8-15
+    - coq-dev
