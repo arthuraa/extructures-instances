@@ -1,4 +1,4 @@
-synopsis: "ordType instances for other common MathComp types"
+synopsis: "OrdType instances for other common MathComp types"
 name: "coq-extructures-instances"
 opam-version: "2.0"
 version: "dev"
