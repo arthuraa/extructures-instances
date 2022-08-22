@@ -44,7 +44,7 @@ commands:
   build:
     steps:
     - run:
-        name: Building extructures
+        name: Building extructures-instances
         command:
           opam install .
 
