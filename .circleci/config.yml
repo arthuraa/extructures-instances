@@ -101,6 +101,7 @@ jobs:
     - prepare:
         mathcomp-version: "dev"
         deriving-version: "dev"
+        extructures-version: "dev"
     - build
     docker:
     - image: coqorg/coq:dev
